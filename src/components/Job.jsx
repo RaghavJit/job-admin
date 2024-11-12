@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import JobModal from "./JobModal";
 
-const Job = ({ id, title, description, datePosted }) => {
+const Job = ({ id, title, description, datePosted, jobs, setJobs }) => {
 
   const openModal = () => {
     document.getElementById(`${id}_job_modal`).showModal();
@@ -28,7 +28,7 @@ const Job = ({ id, title, description, datePosted }) => {
       </div>
 
       {/* Modal for full job details */}
-      <JobModal id={id} />
+      <JobModal id={id} jobs={jobs} setJobs={setJobs}/>
     </>
   );
 };

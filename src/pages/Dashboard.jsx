@@ -43,6 +43,8 @@ function Dashboard() {
             title={job.title}
             description={job.description}
             datePosted={job.posted_on}
+            jobs={jobs}
+            setJobs={setJobs}
           />
         ))}
       </div>

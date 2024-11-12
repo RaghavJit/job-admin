@@ -1,5 +1,5 @@
-import { jobData } from "./db";
+import { candidatesData } from "./db";
 
-export function getAllJobs(){
-    return jobData
+export function getAllCandidates(){
+    return candidatesData
 }

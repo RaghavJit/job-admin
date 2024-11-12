@@ -4,6 +4,6 @@ export function getAllJobs(){
     return jobData
 }
 
-export function getJobById(){
+export function getJobById(id){
     return jobData.find(job => job.id === id);
 }
