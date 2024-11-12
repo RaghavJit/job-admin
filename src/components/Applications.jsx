@@ -4,7 +4,7 @@ const Applications = ({ children }) => {
   return (
     <>
       <div className="overflow-x-auto">
-        <table className="table">
+        <table className="table table-zebra">
           {/* head */}
           <thead>
             <tr>
