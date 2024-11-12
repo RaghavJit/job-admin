@@ -8,16 +8,16 @@ const Job = ({ title, description, datePosted }) => {
 
   return (
     <>
-      <div className="card bg-base-100 w-full sm:max-w-sm lg:max-w-md shadow-xl">
+      <div className="  flex-grow min-w-40 border border-gray-300">
         <div className="card-body">
           <h2 className="card-title">{title}</h2>
           <p>{description}</p>
           <p className="text-sm text-gray-500">Posted on: {datePosted}</p>
 
-          <div className="card-actions justify-end">
-            <button className="btn btn-primary">View Applicants</button>
+          <div className="card-actions flex flex-wrap">
+            <button className="btn btn-primary btn-outline flex-1 rounded-none">View Applicants</button>
             <button
-              className="btn btn-secondary"
+              className="btn btn-secondary btn-outline flex-1 rounded-none"
               onClick={toggleModal}
             >
               View Full Details

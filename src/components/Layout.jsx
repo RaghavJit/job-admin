@@ -35,12 +35,11 @@ const Layout = ({ children }) => {
         </div>
 
         {/* Main page content goes here */}
-        <main className="p-4 flex justify-center items-center min-h-screen">
-          <div className="w-full max-w-6xl">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6 p-4">
+        <main className="p-4 ">
+          
+          
               {children}
-            </div>
-          </div>
+          
         </main>
       </div>
 
