@@ -1,8 +1,8 @@
 // mongodb/dbOperations.js
-const connect = require('./connect');
+import connect from "./connect";
 
 // Insert Job Function
-async function insertJob(job) {
+export async function insertJob(job) {
   const client = await connect();
   const db = client.db('job-admin'); // Replace with your DB name
   const jobsCollection = db.collection('Jobs'); // Replace with your collection name
@@ -19,7 +19,7 @@ async function insertJob(job) {
 }
 
 // Get Jobs Function
-async function getJobs() {
+export async function getJobs() {
   const client = await connect();
   const db = client.db('job-admin'); // Replace with your DB name
   const jobsCollection = db.collection('Jobs'); // Replace with your collection name
@@ -34,10 +34,3 @@ async function getJobs() {
     await client.close();
   }
 }
-
-
-// Export all functions
-module.exports = {
-  insertJob,
-  getJobs,
-};

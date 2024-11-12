@@ -1,4 +1,4 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
+import { MongoClient, ServerApiVersion } from 'mongodb';
 
 const uri = "mongodb+srv://raghavjit002:6i1JfollYcccyXsy@cluster0.t4eku.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 const client = new MongoClient(uri, {
@@ -9,7 +9,7 @@ const client = new MongoClient(uri, {
   }
 });
 
-async function connect() {
+export default async function connect() {
   try {
     await client.connect();
     console.log("Connected to MongoDB!");
@@ -19,5 +19,3 @@ async function connect() {
     throw error;
   }
 }
-
-module.exports = connect;
