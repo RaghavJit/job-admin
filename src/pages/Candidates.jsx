@@ -1,12 +1,29 @@
-import React, {createContext} from 'react';
+  import React, { createContext } from "react";
 
-function Candidates() {
+  import Layout from "../components/Layout";
+  import Applications from "../components/Applications";
 
-  return (
-    <>
-            <button className="btn">cand</button>
-    </>
-  )
-}
+  function Candidates() {
+    return (
+      <>
+        <Layout>
+          <Applications>
+            <tr className="hover">
+              <th>2</th>
+              <td>Hart Hagerty</td>
+              <td>Desktop Support Technician</td>
+              <td>Purple</td>
+            </tr>
+            <tr className="hover">
+              <th>2</th>
+              <td>Hart Hagerty</td>
+              <td>Desktop Support Technician</td>
+              <td>Purple</td>
+            </tr>
+          </Applications>
+        </Layout>
+      </>
+    );
+  }
 
-export default Candidates
+  export default Candidates;
