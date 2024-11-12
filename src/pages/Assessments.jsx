@@ -31,6 +31,11 @@ const Assessments = () => {
 
   return (
     <Layout>
+
+<section>
+        <h1 className="text-4xl text-center mb-5 font-bold">ASSESSMENTS</h1>
+      </section>
+
       <div className="dropdown">
         <div
           tabIndex={0}

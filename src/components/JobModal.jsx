@@ -41,7 +41,7 @@ const JobModal = ({ title, description, datePosted, lastDateToApply, totalApplic
   return (
     <div>
 
-      <dialog id="job_modal" className="modal modal-bottom sm:modal-middle">
+      <dialog id={`${title}_job_modal`} className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
           {/* Title */}
           <h3 className="font-bold text-lg">
