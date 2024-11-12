@@ -7,10 +7,7 @@ import AddJobModal from "../components/AddJobModal";
 function Dashboard() {
   
   const [isModalOpen, setIsModalOpen] = useState(false);
-  //Hint By Ekus: You can use this function to toggle the modal
-  // const changeModal = () => {
-  //   setIsModalOpen(()=> !isModalOpen);
-  // }
+  
   const openModal = () => {
     setIsModalOpen(true);
     document.getElementById('add_job_modal').showModal();
@@ -50,7 +47,7 @@ function Dashboard() {
       </button>
 
       {/* Add Job Modal */}
-      {isModalOpen && <AddJobModal closeModal={closeModal} />}
+      <AddJobModal closeModal={closeModal} />
     </Layout>
   );
 }

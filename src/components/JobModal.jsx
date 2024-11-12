@@ -40,12 +40,6 @@ const JobModal = ({ title, description, datePosted, lastDateToApply, totalApplic
 
   return (
     <div>
-      <button
-        className="btn btn-secondary"
-        onClick={() => document.getElementById('job_modal').showModal()}
-      >
-        View Full Details
-      </button>
 
       <dialog id="job_modal" className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
