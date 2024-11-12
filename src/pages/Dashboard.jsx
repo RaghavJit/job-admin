@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+
 import Layout from "../components/Layout";
 import Job from "../components/Job";
 import AddJobModal from "../components/AddJobModal";
-import { getJobs } from "../mongodb/jobs"; // Importing the getJobs function
+
+import { getAllJobs } from "../database/jobs";
 
 function Dashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -11,7 +13,7 @@ function Dashboard() {
   // Fetch jobs using the getJobs function
   useEffect(() => {
     async function fetchJobs() {
-      const jobsData = await getJobs(); // Call the imported function
+      const jobsData = await getAllJobs(); // Call the imported function
       setJobs(jobsData); // Set the fetched jobs in state
     }
 
@@ -20,12 +22,12 @@ function Dashboard() {
 
   const openModal = () => {
     setIsModalOpen(true);
-    document.getElementById('add_job_modal').showModal();
+    document.getElementById("add_job_modal").showModal();
   };
 
   const closeModal = () => {
     setIsModalOpen(false);
-    document.getElementById('add_job_modal').close();
+    document.getElementById("add_job_modal").close();
   };
 
   return (
@@ -33,14 +35,14 @@ function Dashboard() {
       <section>
         <h1 className="text-4xl text-center mb-5 font-bold">JOBS</h1>
       </section>
-
-      <div className="flex flex-wrap items-center justify-center gap-2 mx-10">
-        {/* Map over the jobs array and render a Job component for each */}
+      <div className="  flex flex-wrap items-center justify-center  gap-2 mx-10">
         {jobs.map((job) => (
           <Job
-            key={job._id} // Make sure to use a unique key (assuming _id exists)
+            key={job.id} // Make sure to use a unique key (assuming _id exists)
+            id={job.id}
             title={job.title}
             description={job.description}
+            datePosted={job.posted_on}
           />
         ))}
       </div>
@@ -55,7 +57,7 @@ function Dashboard() {
       </button>
 
       {/* Add Job Modal */}
-      <AddJobModal closeModal={closeModal} />
+      <AddJobModal closeModal={closeModal} setJobs={setJobs} />
     </Layout>
   );
 }

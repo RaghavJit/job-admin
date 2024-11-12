@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const AddJobModal = ({ closeModal }) => {
+const AddJobModal = ({ closeModal, setJobs }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [datePosted, setDatePosted] = useState("");
@@ -10,14 +10,20 @@ const AddJobModal = ({ closeModal }) => {
 
   const handleAddJob = () => {
     // Logic for adding the job (e.g., update state, send request, etc.)
-    console.log("Job Added", {
-      title,
-      description,
-      datePosted,
-      lastDateToApply,
-      totalApplications,
-      salary,
-    });
+
+    const randomId = '_' + Math.random().toString(36).substr(2, 9);
+
+    const newJob = {
+      id: randomId, // You can generate a new unique ID
+      title: title, // Values from your form inputs
+      description: description,
+      salary: salary,
+      posted_on: datePosted,
+      last_date_to_apply: lastDateToApply
+    };
+    
+    setJobs((prevJobs) => [...prevJobs, newJob]);
+
     closeModal(); // Close the modal after job is added
   };
 

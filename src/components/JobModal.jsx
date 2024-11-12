@@ -1,135 +1,110 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import {getJobById} from "../database/jobs"; // Import getJobById function
 
-const JobModal = ({ title, description, datePosted, lastDateToApply, totalApplications, salary }) => {
-  // State to manage whether the modal is in 'edit' mode
+const JobModal = ({ id }) => {
   const [isEditing, setIsEditing] = useState(false);
+  const [jobData, setJobData] = useState(null);
 
-  // State to store updated field values
-  const [updatedTitle, setUpdatedTitle] = useState(title);
-  const [updatedDescription, setUpdatedDescription] = useState(description);
-  const [updatedDatePosted, setUpdatedDatePosted] = useState(datePosted);
-  const [updatedLastDateToApply, setUpdatedLastDateToApply] = useState(lastDateToApply);
-  const [updatedSalary, setUpdatedSalary] = useState(salary);
-  const [updatedApplications, setUpdatedApplications] = useState(totalApplications);
-
-  // Handle the Edit/Save button click
+  // Handlers for edit, save, and delete
   const handleEditClick = (e) => {
-    e.preventDefault(); // Prevent form submission and modal closing
+    e.preventDefault();
     setIsEditing(true);
   };
 
-  // Handle saving the updated fields
   const handleSaveClick = (e) => {
-    e.preventDefault(); // Prevent form submission and modal closing
-    // Save the changes (for now we just log them to the console)
-    console.log("Saved changes", {
-      updatedTitle,
-      updatedDescription,
-      updatedDatePosted,
-      updatedLastDateToApply,
-      updatedSalary,
-      updatedApplications,
-    });
-    setIsEditing(false); // Switch back to non-editable mode
+    e.preventDefault();
+    console.log("Saved changes", jobData);
+    setIsEditing(false);
   };
 
-  // Handle delete (You can add your delete functionality here)
   const handleDeleteClick = () => {
-    console.log("Deleted job:", title); // Placeholder for delete functionality
+    console.log("Deleted job:", jobData?.title);
   };
+
+  if (!jobData) return null; // Render nothing until data is loaded
 
   return (
     <div>
-
-      <dialog id={`${title}_job_modal`} className="modal modal-bottom sm:modal-middle">
+      <dialog id={`${id}_job_modal`} className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
-          {/* Title */}
           <h3 className="font-bold text-lg">
             {isEditing ? (
               <input
                 type="text"
-                value={updatedTitle}
-                onChange={(e) => setUpdatedTitle(e.target.value)}
+                value={jobData.title}
+                onChange={(e) => setJobData({ ...jobData, title: e.target.value })}
                 className="input input-bordered w-full"
               />
             ) : (
-              updatedTitle
+              jobData.title
             )}
           </h3>
 
-          {/* Description */}
           <p className="py-4">
             {isEditing ? (
               <textarea
-                value={updatedDescription}
-                onChange={(e) => setUpdatedDescription(e.target.value)}
+                value={jobData.description}
+                onChange={(e) => setJobData({ ...jobData, description: e.target.value })}
                 className="textarea textarea-bordered w-full"
               />
             ) : (
-              updatedDescription
+              jobData.description
             )}
           </p>
 
-          {/* Date Posted */}
           <div className="grid grid-cols-1 gap-2 text-sm">
             <p>
               <strong>Date Posted:</strong>{" "}
               {isEditing ? (
                 <input
                   type="date"
-                  value={updatedDatePosted}
-                  onChange={(e) => setUpdatedDatePosted(e.target.value)}
+                  value={jobData.datePosted}
+                  onChange={(e) => setJobData({ ...jobData, datePosted: e.target.value })}
                   className="input input-bordered"
                 />
               ) : (
-                updatedDatePosted
+                jobData.datePosted
               )}
             </p>
-            {/* Last Date to Apply */}
             <p>
               <strong>Last Date to Apply:</strong>{" "}
               {isEditing ? (
                 <input
                   type="date"
-                  value={updatedLastDateToApply}
-                  onChange={(e) => setUpdatedLastDateToApply(e.target.value)}
+                  value={jobData.lastDateToApply}
+                  onChange={(e) => setJobData({ ...jobData, lastDateToApply: e.target.value })}
                   className="input input-bordered"
                 />
               ) : (
-                updatedLastDateToApply
+                jobData.lastDateToApply
               )}
             </p>
-            {/* Total Applications (Non-editable) */}
             <p>
-              <strong>Total Applications:</strong> {updatedApplications}
+              <strong>Total Applications:</strong> {jobData.applicants.length}
             </p>
-            {/* Salary */}
             <p>
               <strong>Salary:</strong>{" "}
               {isEditing ? (
                 <input
                   type="number"
-                  value={updatedSalary}
-                  onChange={(e) => setUpdatedSalary(e.target.value)}
+                  value={jobData.salary}
+                  onChange={(e) => setJobData({ ...jobData, salary: e.target.value })}
                   className="input input-bordered"
                 />
               ) : (
-                updatedSalary
+                jobData.salary
               )}
             </p>
           </div>
 
           <div className="modal-action">
             <form method="dialog">
-              {/* Close Button */}
-              <button className="btn" onClick={() => document.getElementById('job_modal').close()}>
+              <button className="btn" onClick={() => document.getElementById(`${id}_job_modal`).close()}>
                 Close
               </button>
-              {/* Delete Button */}
               <button className="btn btn-danger" onClick={handleDeleteClick}>
                 Delete
               </button>
-              {/* Edit/Save Button */}
               <button
                 className="btn btn-primary"
                 onClick={isEditing ? handleSaveClick : handleEditClick}
